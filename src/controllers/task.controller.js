@@ -1,6 +1,6 @@
 import { TaskModel } from "../models/task.model.js";
 console.log("Verificacion Modelo:", TaskModel);
-
+//modelo de tareas.
 export const createTask = async (req, res) => {
     try {
         const { title, description, isComplete } = req.body;
@@ -37,7 +37,7 @@ export const getTaskById = async (req, res) => {
         console.error("Error al obtener la tarea", error);
         res.status(500).json({ message: "Error interno del servidor" });
     }
-};
+};   
 
 export const updateTask = async (req, res) => {
     try {
