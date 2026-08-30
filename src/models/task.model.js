@@ -6,14 +6,21 @@ export const TaskModel = sequelize.define("Task", {
         type: DataTypes.STRING(100),    
     allowNull: false,
     unique: true,
+    validate:{
+        notEmpty: true
+    }
     },
     description: { 
     type: DataTypes.STRING(100),
     allowNull: false,
+    validate:{
+        notEmpty: true
+    }
     },
-    isCompleted: {
+    isComplete: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
+    allowNull: false,
     },
 });
 
