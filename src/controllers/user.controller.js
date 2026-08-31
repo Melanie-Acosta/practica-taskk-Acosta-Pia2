@@ -3,13 +3,13 @@ console.log("Verificacion Modelo:", UserModel);
 
 export const createUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, person_id } = req.body;
         if (!name) {
             return res.status(400).json({ message: "El nombre no puede estar vacío" });
         }
-        console.log("createUser - Data;:", { name, email, password });
+        console.log("createUser - Data;:", { name, email, password, person_id });
 
-const user = await UserModel.create({ name, email, password });
+const user = await UserModel.create({ name, email, password, person_id });
         res.status(201).json(user);
     } catch (error) {
         console.error("Error al crear el usuario:", error);
