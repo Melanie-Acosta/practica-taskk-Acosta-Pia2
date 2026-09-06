@@ -7,7 +7,9 @@ console.log("Verificacion Modelo:", TaskModel);
 //modelo de tareas.
 export const createTask = async (req, res) => {
     try {
-        const { title, description,is_completed, user_id } = req.body;
+        const { title, description,is_completed } = req.body;
+        const user_id = req.params.user_id;
+
         if (!user_id) {
             return res.status(400).json({ message: "No se puede crear una tarea sin asignar un usuario" });
         }

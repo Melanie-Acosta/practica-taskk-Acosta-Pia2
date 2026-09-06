@@ -10,7 +10,8 @@ export const createUsuarioValidaciones = [
     const existingUser = await UserModel.findOne({ where: { email } });
     if (existingUser) {
     throw new Error("El correo electrónico ya está registrado")
-    }}),
+    }
+    return true;}),
     body("password")
     .notEmpty().withMessage("Password es requerido")
     .isLength({ min: 6 }).withMessage("Password debe tener al menos 6 caracteres"),
