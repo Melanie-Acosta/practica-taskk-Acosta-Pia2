@@ -7,6 +7,7 @@ import { personRouter } from './src/routes/person.routes.js';
 const app = express();
 const PORT = 3000;
 
+//para que entienda el formato json
 app.use(express.json());
 
 // Log de diagnóstico general
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//configuracion de las rutas.
 app.use("/api", userRoutes);
 app.use("/api", taskRouter);
 app.use("/api", personRouter); 
