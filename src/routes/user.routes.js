@@ -5,7 +5,7 @@ import { createUsuarioValidaciones } from "../middlewares/validations/user.valid
 
 export const userRoutes = Router();
 
-userRoutes.post("/users", createUsuarioValidaciones, validate, createUser);
+userRoutes.post("/users/:person_id", createUsuarioValidaciones, validate, createUser);
 userRoutes.get("/users", getAllUsers);
 userRoutes.get("/users/:id", getUserById);
 userRoutes.put("/users/:id", updateUser);
