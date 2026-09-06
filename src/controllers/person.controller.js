@@ -1,14 +1,15 @@
 import { PersonModel } from "../models/person.model.js";
 
 export const createPerson = async (req, res) => {
+  console.log("body recibido", req.body); 
   try {
-    const { name, LastName } = req.body;
+    const { name, lastname } = req.body;
 
-    if (!name || !LastName) {
-    return res.status(400).json({ message: "El nombre y apellido son obligatorios" });
+    if (!name) {
+    return res.status(400).json({ message: "El nombre no puede estar vacio" });
     }
 
-    const person = await PersonModel.create({ name, LastName });
+    const person = await PersonModel.create({ name, LastName: lastname });
     return res.status(201).json(person);
     } catch (error) {
     console.error("Error al crear la persona:", error);

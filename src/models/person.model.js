@@ -10,5 +10,7 @@ export const PersonModel = sequelize.define("Person", {
         type: DataTypes.STRING(100),
         allowNull: false,
     },
-},
+},{
+    timestamps: false
+}
 );

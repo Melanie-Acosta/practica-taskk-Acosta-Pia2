@@ -1,9 +1,12 @@
 import { UserModel } from "../models/user.model.js";
+
 console.log("Verificacion Modelo:", UserModel);
 
 export const createUser = async (req, res) => {
     try {
-        const { name, email, password, person_id } = req.body;
+        const { person_id } = req.params;
+        const { name, email, password } = req.body;
+
         if (!name) {
             return res.status(400).json({ message: "El nombre no puede estar vacío" });
         }
