@@ -34,3 +34,42 @@ export const createTaskValidaciones = [
     .optional()
     .isBoolean().withMessage("El campo is_completed debe ser un valor booleano (true/false)")
 ];
+
+export const updateTaskValidaciones = [
+    body("title")
+    .optional()
+    .trim()
+    .isLength({ min: 3, max: 50 })
+    .withMessage("El título debe tener entre 3 y 50 caracteres"),
+    body("description")
+    .optional()
+    .trim()
+    .isLength({ min: 5, max: 100 })
+    .withMessage("La descripción debe tener entre 5 y 100 caracteres"),
+    body("is_completed")
+    .optional()
+    .isBoolean()
+    .withMessage("El campo is_completed debe ser un valor booleano (true/false)"),
+    param("user_id")
+    .isInt({ min: 1 })
+    .withMessage("El ID del usuario debe ser un número entero positivo")
+    .custom(async (user_id) => {
+    const user = await UserModel.findByPk(user_id); 
+    if (!user) {
+        throw new Error("El usuario no existe en la base de datos");
+    }  
+    return true;
+    }),
+];
+
+export const getTaskByIdValidaciones = [
+    param("id")
+    .isInt({ min: 1 })
+    .withMessage("El ID de la tarea debe ser un número entero positivo")
+];
+
+export const deleteTaskValidaciones = [
+    param("id")
+    .isInt({ min: 1 })
+    .withMessage("El ID de la tarea un numeor positivo")
+];

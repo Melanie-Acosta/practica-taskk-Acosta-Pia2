@@ -1,16 +1,13 @@
 import { UserModel } from "../models/user.model.js";
+import { matchedData  } from "express-validator";
+import { validationResult } from 'express-validator';
 
 console.log("Verificacion Modelo:", UserModel);
 
 export const createUser = async (req, res) => {
     try {
         const { person_id } = req.params;
-        const { name, email, password } = req.body;
-
-        if (!name) {
-            return res.status(400).json({ message: "El nombre no puede estar vacío" });
-        }
-        console.log("createUser - Data;:", { name, email, password, person_id });
+    const validateData = matchedData(req);
 
 const user = await UserModel.create({ name, email, password, person_id });
         res.status(201).json(user);
