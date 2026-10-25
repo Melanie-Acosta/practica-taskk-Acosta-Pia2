@@ -1,4 +1,5 @@
 import { PersonModel } from "../models/person.model.js";
+import { UserModel } from "../models/user.model.js";
 
 export const createPerson = async (req, res) => {
   console.log("body recibido", req.body); 
@@ -26,3 +27,23 @@ export const getAllPeople = async (req, res) => {
     return res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
+export const deletePerson = async (req, res) => {
+    try {
+    const { id } = req.params;
+
+    const deleted = await PersonModel.destroy({
+    where: { id }
+    });
+
+    if (!deleted) {
+    return res.status(404).json({ message: "Persona no encontrada" });
+    }
+
+    return res.status(200).json({ message: "Persona eliminada correctamente" });
+    } catch (error) {
+    console.error("Error al eliminar la persona:", error);
+    return res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+

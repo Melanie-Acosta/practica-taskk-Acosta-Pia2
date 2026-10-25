@@ -30,6 +30,10 @@ export default TaskModel;
 
 //relaciones
 //relacion de uno a muchos
-TaskModel.belongsTo(UserModel,{ foreignKey: "user_id", as: "author"});
+TaskModel.belongsTo(UserModel,{ 
+    foreignKey: "user_id", 
+    as: "author", 
+    onDelete: "CASCADE",
+});
 
 UserModel.hasMany(TaskModel, { foreignKey: "user_id", as: "task"})
