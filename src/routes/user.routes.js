@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { createUser, getAllUsers, getUserById, updateUser, deleteUser } from "../controllers/user.controller.js";
 import { validate } from "../middlewares/validate.js";
-import { createUsuarioValidaciones } from "../middlewares/validations/user.validation.js";
+import { createUsuarioValidaciones, updateUsuarioValidaciones } from "../middlewares/validations/user.validation.js";
 
 export const userRoutes = Router();
 
 userRoutes.post("/users/:person_id", createUsuarioValidaciones, validate, createUser);
 userRoutes.get("/users", getAllUsers);
 userRoutes.get("/users/:id", getUserById);
-userRoutes.put("/users/:id", updateUser);
+userRoutes.put("/users/:id", updateUsuarioValidaciones, validate, updateUser);
 userRoutes.delete("/users/:id", deleteUser);
 
 export default userRoutes;

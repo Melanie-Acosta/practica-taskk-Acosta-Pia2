@@ -1,3 +1,4 @@
+import { matchedData } from "express-validator";
 import { UserModel } from "../models/user.model.js";
 
 console.log("Verificacion Modelo:", UserModel);
@@ -40,7 +41,20 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        return res.status(200).json({ message: "Usuario actualizado corretamente" });
+        const validateDataBody = matchedData(req, {locations: ["body"]});
+        const { id }= matchedData(req, {locations: ["params"]})
+
+        const userExist = await UserModel.findByPk(id)
+        console.log(userExist);
+        if (!userExist) {
+            return res.status(404).json({ message: "usuario no encontrado"})
+        }
+
+        await userExist.update(validateDataBody); 
+
+        console.log(dataValues);
+
+        return res.status(200).json({ message: "Usuario actualizado corretamente",updateUser });
     } catch (error) {
         console.log("Error")
         return res.status(500).json({ messaje: "Error interno del servidor "})
@@ -49,6 +63,18 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
+        const { id } = req.params;
+
+
+        const userExist = await UserModel.findByPk(id);
+        console.log(id);
+
+        if (!userExist) {
+            return res.status(404).json({ message: "Usuario no encontrado "})
+        }
+
+        await userExist.destroy()
+        
         return res.status(200).json({ message: "Usuario eliminado correctamente" })
     } catch (error) {
         console.log("Error");
