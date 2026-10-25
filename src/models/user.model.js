@@ -26,6 +26,9 @@ export const UserModel = sequelize.define("User", {
     }
 },);
 
-UserModel.belongsTo(PersonModel, { foreignKey: "person_id", as:"owner" });
+UserModel.belongsTo(PersonModel, { 
+    foreignKey: "person_id", 
+    as:"owner", 
+});
 
 PersonModel.hasOne(UserModel, { foreignKey: "person_id", as: "user"});
