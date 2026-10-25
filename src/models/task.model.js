@@ -33,7 +33,7 @@ export default TaskModel;
 TaskModel.belongsTo(UserModel,{ 
     foreignKey: "user_id", 
     as: "author", 
-    onDelete: "CASCADE",
+   // onDelete: "CASCADE",
 });
 
 UserModel.hasMany(TaskModel, { foreignKey: "user_id", as: "task"})
